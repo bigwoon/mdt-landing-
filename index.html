@@ -1,0 +1,1398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Millionaire Day Traders — Join 500+ traders using a proven, institutional-grade protocol to master the markets and build a lasting legacy. Limited seats available." />
+  <title>MDT | Millionaire Day Traders — Stop Trading Alone. Start Winning with the Room.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ============================================================
+       DESIGN TOKENS
+    ============================================================ */
+    :root {
+      --bg:            #080808;
+      --surface:       #0f0f0f;
+      --surface-2:     #141414;
+      --gold:          #D4AF37;
+      --gold-hover:    #e4c247;
+      --gold-dim:      rgba(212,175,55,0.10);
+      --gold-border:   rgba(212,175,55,0.35);
+      --silver:        #A0A0A0;
+      --border:        rgba(160,160,160,0.15);
+      --text:          #F3F4F6;
+      --muted:         #A0A0A0;
+      --font-head:     'Inter', sans-serif;
+      --font-mono:     'Space Mono', monospace;
+      --pad-y:         80px;
+      --pad-x:         clamp(20px, 5vw, 80px);
+      --radius:        12px;
+      --ease:          cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    /* ============================================================
+       RESET & BASE
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-head);
+      font-size: 18px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ============================================================
+       TYPOGRAPHY
+    ============================================================ */
+    h1 {
+      font-family: var(--font-head);
+      font-weight: 800;
+      font-size: clamp(40px, 7vw, 80px);
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      color: var(--text);
+    }
+    h2 {
+      font-family: var(--font-head);
+      font-weight: 800;
+      font-size: clamp(28px, 4vw, 56px);
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+    h3 {
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: clamp(18px, 2vw, 24px);
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+    }
+    .sub-headline {
+      font-family: var(--font-head);
+      font-weight: 500;
+      font-size: clamp(16px, 2.5vw, 20px);
+      color: var(--muted);
+      letter-spacing: -0.01em;
+      line-height: 1.6;
+    }
+    .ui-label {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .gold  { color: var(--gold); }
+    .muted { color: var(--muted); }
+
+    /* ============================================================
+       LAYOUT UTILITIES
+    ============================================================ */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--pad-x);
+    }
+    .section {
+      padding: var(--pad-y) var(--pad-x);
+    }
+
+    /* ============================================================
+       BUTTONS
+    ============================================================ */
+    .btn-gold {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #D4AF37 0%, #e8c84d 50%, #b8932a 100%);
+      color: #080808;
+      font-family: var(--font-head);
+      font-weight: 800;
+      font-size: 15px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 18px 42px;
+      min-height: 56px;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s var(--ease);
+      box-shadow: 0 0 30px rgba(212,175,55,0.30), 0 4px 20px rgba(0,0,0,0.5);
+      position: relative;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .btn-gold::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.18) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .btn-gold:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 55px rgba(212,175,55,0.55), 0 8px 32px rgba(0,0,0,0.6);
+    }
+    .btn-gold:active { transform: translateY(0); }
+
+    /* ============================================================
+       SECTION 0: URGENCY BANNER
+    ============================================================ */
+    #banner {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: linear-gradient(90deg, #0c0a00, #1a1500, #0c0a00);
+      border-bottom: 1px solid var(--gold-border);
+      padding: 11px 20px;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+    #banner .pulse {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: #ff4444;
+      animation: pulse-dot 1.6s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+    #banner .banner-text {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    #banner .dismiss {
+      position: absolute;
+      right: 20px;
+      background: none;
+      border: none;
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 16px;
+      line-height: 1;
+      padding: 4px;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+    #banner .dismiss:hover { opacity: 1; }
+
+    @keyframes pulse-dot {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50%       { transform: scale(1.5); opacity: 0.5; }
+    }
+
+    /* ============================================================
+       SECTION 1: HERO
+    ============================================================ */
+    #hero {
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+    /* Background layer */
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('hero-bg.png') center / cover no-repeat;
+      opacity: 0.28;
+      z-index: 0;
+    }
+    /* Gradient vignette */
+    #hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 90% 60% at 50% 35%, rgba(212,175,55,0.05) 0%, transparent 65%),
+        linear-gradient(180deg, rgba(8,8,8,0.1) 0%, rgba(8,8,8,0.6) 70%, rgba(8,8,8,1) 100%);
+      z-index: 1;
+    }
+
+    /* NAV */
+    #hero-nav {
+      position: relative;
+      z-index: 10;
+      padding: 32px var(--pad-x);
+      display: flex;
+      justify-content: center;
+    }
+    .nav-logo {
+      height: 68px;
+      width: auto;
+      filter: drop-shadow(0 0 16px rgba(212,175,55,0.40));
+    }
+
+    /* HERO CONTENT */
+    .hero-body {
+      position: relative;
+      z-index: 10;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-glass {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 56px 64px 64px;
+      text-align: center;
+      background: rgba(8, 8, 8, 0.55);
+      backdrop-filter: blur(18px) saturate(1.4);
+      -webkit-backdrop-filter: blur(18px) saturate(1.4);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 20px;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.05);
+    }
+    .hero-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid var(--gold-border);
+      background: var(--gold-dim);
+      padding: 7px 20px;
+      border-radius: 2px;
+      display: inline-block;
+      margin-bottom: 32px;
+    }
+    .hero-glass h1 {
+      margin-bottom: 24px;
+    }
+    /* Kinetic typography */
+    .kinetic-text {
+      display: inline-block;
+      background: linear-gradient(135deg, #D4AF37, #ffe98a, #D4AF37, #a07820);
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: gold-shimmer 3.5s ease infinite;
+    }
+    @keyframes gold-shimmer {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .hero-sub {
+      font-size: clamp(16px, 1.8vw, 19px);
+      color: rgba(243,244,246,0.75);
+      max-width: 620px;
+      margin: 0 auto 44px;
+      line-height: 1.7;
+    }
+    .hero-cta {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+    .hero-nudge {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    /* ============================================================
+       SECTION 2: AGITATION
+    ============================================================ */
+    #agitation {
+      padding: var(--pad-y) var(--pad-x);
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .agitation-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    /* LEFT: dark chart visual */
+    .agitation-visual {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      position: relative;
+      aspect-ratio: 4/3;
+      display: flex;
+      align-items: flex-end;
+      padding: 28px;
+    }
+    .agitation-visual::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, transparent 40%, rgba(8,8,8,0.7) 100%),
+        url('hero-bg.png') center / cover no-repeat;
+      opacity: 0.45;
+    }
+    .chart-overlay {
+      position: relative;
+      z-index: 2;
+    }
+    .chart-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .chart-value {
+      font-family: var(--font-head);
+      font-weight: 800;
+      font-size: 48px;
+      color: var(--text);
+      line-height: 1;
+    }
+    .chart-value span {
+      font-size: 22px;
+      color: #4ade80;
+      font-weight: 700;
+      margin-left: 8px;
+    }
+    /* Fake chart SVG lines */
+    .chart-svg {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+    }
+    /* RIGHT: copy */
+    .agitation-label {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 18px;
+      display: block;
+    }
+    .agitation-copy h2 { margin-bottom: 20px; }
+    .agitation-copy p {
+      color: rgba(243,244,246,0.70);
+      font-size: 17px;
+      line-height: 1.75;
+    }
+    .agitation-stats {
+      margin-top: 36px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .ag-stat {
+      background: var(--surface-2);
+      padding: 22px 20px;
+    }
+    .ag-stat-num {
+      font-family: var(--font-head);
+      font-weight: 900;
+      font-size: 36px;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .ag-stat-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ============================================================
+       SECTION 3: THE PROTOCOL (ROADMAP)
+    ============================================================ */
+    #protocol {
+      padding: var(--pad-y) var(--pad-x);
+      background: var(--bg);
+    }
+    .protocol-header {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto 72px;
+    }
+    .protocol-header .ui-label { margin-bottom: 18px; display: block; }
+    .protocol-header h2 { margin-bottom: 0; }
+
+    /* Horizontal roadmap — desktop */
+    .roadmap {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr auto 1fr;
+      align-items: start;
+    }
+    .roadmap-connector {
+      height: 1px;
+      background: var(--silver);
+      opacity: 0.35;
+      align-self: center;
+      margin-top: 36px; /* aligns with center of step circle */
+      width: 100%;
+    }
+    .roadmap-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 0 16px;
+    }
+    .step-badge {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+    /* asymmetric step label sizing */
+    .roadmap-step:nth-child(1) .step-badge { font-size: 12px; }
+    .roadmap-step:nth-child(3) .step-badge { font-size: 11px; }
+    .roadmap-step:nth-child(5) .step-badge { font-size: 10px; }
+
+    .step-circle {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      border: 1px solid var(--gold-border);
+      background: var(--gold-dim);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      margin-bottom: 24px;
+      transition: all 0.3s var(--ease);
+      box-shadow: 0 0 0 0 rgba(212,175,55, 0);
+    }
+    .roadmap-step:hover .step-circle {
+      border-color: var(--gold);
+      box-shadow: 0 0 28px rgba(212,175,55,0.30);
+      transform: translateY(-4px);
+    }
+    .step-phase {
+      font-family: var(--font-head);
+      font-weight: 800;
+      font-size: 18px;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+    .roadmap-step p {
+      font-size: 15px;
+      color: rgba(243,244,246,0.65);
+      line-height: 1.65;
+      max-width: 260px;
+    }
+
+    /* ============================================================
+       SECTION 4: TESTIMONIAL
+    ============================================================ */
+    #testimonial {
+      padding: var(--pad-y) var(--pad-x);
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+    }
+    .testimonial-wrap {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .testimonial-wrap .ui-label {
+      display: block;
+      margin-bottom: 48px;
+    }
+    .testimonial-card {
+      border: 1px solid var(--gold-border);
+      border-radius: 16px;
+      padding: 56px 64px;
+      background: linear-gradient(135deg, #0c0b06 0%, #0f0e0a 100%);
+      box-shadow: 0 0 60px rgba(212,175,55,0.06), 0 24px 60px rgba(0,0,0,0.5);
+      position: relative;
+    }
+    .testimonial-card::before {
+      content: '\201C';
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 120px;
+      color: var(--gold);
+      opacity: 0.15;
+      line-height: 1;
+      pointer-events: none;
+    }
+    .testimonial-card h2 {
+      font-size: clamp(22px, 3vw, 34px);
+      margin-bottom: 28px;
+    }
+    .testimonial-card blockquote {
+      font-size: clamp(17px, 2vw, 21px);
+      color: rgba(243,244,246,0.82);
+      line-height: 1.75;
+      font-style: italic;
+      margin-bottom: 32px;
+    }
+    .testimonial-card cite {
+      font-style: normal;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .testimonial-card cite span {
+      color: var(--gold);
+    }
+
+    /* ============================================================
+       SECTION 5: MISSION / FOUNDERS
+    ============================================================ */
+    #mission {
+      padding: var(--pad-y) var(--pad-x);
+      background: var(--bg);
+    }
+    .mission-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .mission-photo-wrap {
+      position: relative;
+    }
+    .mission-photo {
+      width: 100%;
+      aspect-ratio: 4/5;
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--surface-2);
+      position: relative;
+    }
+    .mission-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(20%) contrast(1.05);
+    }
+    /* Placeholder when no real image */
+    .mission-photo-placeholder {
+      width: 100%;
+      height: 100%;
+      background:
+        linear-gradient(160deg, #111 0%, #0a0a0a 40%, #0f0e05 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+    }
+    .mission-photo-placeholder .ph-icon {
+      font-size: 56px;
+      opacity: 0.3;
+    }
+    .mission-photo-placeholder .ph-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      opacity: 0.5;
+    }
+    .mission-photo-tag {
+      position: absolute;
+      bottom: -14px;
+      left: 28px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 9px 18px;
+      border-radius: 6px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    .mission-photo-tag strong { color: var(--gold); }
+
+    .mission-copy .ui-label { margin-bottom: 20px; display: block; }
+    .mission-copy h2 { margin-bottom: 24px; }
+    .mission-copy p {
+      color: rgba(243,244,246,0.70);
+      font-size: 17px;
+      line-height: 1.80;
+      margin-bottom: 18px;
+    }
+    .mission-copy p:last-of-type { margin-bottom: 0; }
+    .mission-divider {
+      width: 48px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold), transparent);
+      margin: 28px 0;
+    }
+
+    /* ============================================================
+       SECTION 6: VALUE STACK
+    ============================================================ */
+    #value {
+      padding: var(--pad-y) var(--pad-x);
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+    }
+    .value-header {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto 60px;
+    }
+    .value-header .ui-label { margin-bottom: 18px; display: block; }
+    .value-header h2 { margin-bottom: 14px; }
+    .value-header p {
+      color: var(--muted);
+      font-size: 17px;
+    }
+    .value-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    /* Macbook product showcase */
+    .mockup-showcase {
+      max-width: 900px;
+      margin: 72px auto 0;
+      position: relative;
+    }
+    .mockup-badge {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--gold);
+      color: var(--bg);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 6px 20px;
+      border-radius: 20px;
+      z-index: 2;
+      white-space: nowrap;
+    }
+    .mockup-frame {
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.70), 0 0 60px rgba(212,175,55,0.08);
+    }
+    .mockup-frame img {
+      width: 100%;
+      display: block;
+    }
+    .value-card {
+      background: rgba(8,8,8,0.70);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px 36px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.35s var(--ease);
+      cursor: default;
+    }
+    /* gold glow on hover */
+    .value-card:hover {
+      border-color: var(--gold-border);
+      box-shadow: 0 0 40px rgba(212,175,55,0.12), 0 0 0 1px rgba(212,175,55,0.15), 0 20px 50px rgba(0,0,0,0.5);
+      transform: translateY(-3px);
+    }
+    /* top shimmer line */
+    .value-card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(212,175,55,0.6), transparent);
+      opacity: 0;
+      transition: opacity 0.35s var(--ease);
+    }
+    .value-card:hover::after { opacity: 1; }
+
+    .value-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 12px;
+      background: var(--gold-dim);
+      border: 1px solid rgba(212,175,55,0.20);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      margin-bottom: 24px;
+    }
+    .value-card h3 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+    .value-card-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+      display: block;
+    }
+    .value-card p {
+      font-size: 15px;
+      color: rgba(243,244,246,0.62);
+      line-height: 1.7;
+    }
+
+    /* ============================================================
+       SECTION 7: FINAL CTA
+    ============================================================ */
+    #final-cta {
+      padding: var(--pad-y) var(--pad-x);
+      background: var(--bg);
+    }
+    .cta-card {
+      max-width: 800px;
+      margin: 0 auto;
+      background: linear-gradient(135deg, #0d0c07 0%, #100f08 100%);
+      border: 1px solid var(--gold-border);
+      border-radius: 20px;
+      padding: 72px 72px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 80px rgba(212,175,55,0.07), 0 40px 80px rgba(0,0,0,0.6);
+    }
+    .cta-card::before {
+      content: '';
+      position: absolute;
+      top: -60px; left: -60px;
+      width: 240px; height: 240px;
+      background: radial-gradient(circle, rgba(212,175,55,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .cta-card::after {
+      content: '';
+      position: absolute;
+      bottom: -60px; right: -60px;
+      width: 200px; height: 200px;
+      background: radial-gradient(circle, rgba(212,175,55,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .cta-card .ui-label {
+      margin-bottom: 24px;
+      display: block;
+    }
+    .cta-card h2 {
+      margin-bottom: 20px;
+    }
+    .cta-card .sub-headline {
+      max-width: 520px;
+      margin: 0 auto 40px;
+    }
+    .cta-warning {
+      margin-top: 22px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      opacity: 0.8;
+    }
+    .cta-warning strong { color: rgba(212,175,55,0.80); }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    #footer {
+      background: #040404;
+      border-top: 1px solid var(--border);
+      padding: 52px var(--pad-x) 36px;
+    }
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 24px;
+    }
+    .footer-logo {
+      height: 52px;
+      width: auto;
+      filter: drop-shadow(0 0 8px rgba(212,175,55,0.25));
+      opacity: 0.85;
+    }
+    .footer-legal {
+      max-width: 680px;
+      font-size: 12px;
+      color: #444;
+      line-height: 1.7;
+    }
+    .footer-legal a { color: #666; text-decoration: underline; }
+    .footer-divider {
+      width: 1px;
+      height: 1px;
+      background: var(--border);
+      width: 100%;
+    }
+    .footer-copy {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      color: #333;
+      text-transform: uppercase;
+    }
+
+    /* ============================================================
+       STICKY MOBILE CTA FOOTER
+    ============================================================ */
+    #sticky-cta {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 300;
+      padding: 12px 20px;
+      background: rgba(8,8,8,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-top: 1px solid var(--gold-border);
+    }
+    #sticky-cta .btn-gold {
+      width: 100%;
+      min-height: 52px;
+      font-size: 14px;
+    }
+
+    /* ============================================================
+       SCROLL REVEAL
+    ============================================================ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+    .reveal-d1 { transition-delay: 0.10s; }
+    .reveal-d2 { transition-delay: 0.20s; }
+    .reveal-d3 { transition-delay: 0.30s; }
+    .reveal-d4 { transition-delay: 0.40s; }
+
+    .stagger > * {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+    .stagger.visible > *:nth-child(1) { opacity:1; transform:none; transition-delay: 0.00s; }
+    .stagger.visible > *:nth-child(2) { opacity:1; transform:none; transition-delay: 0.12s; }
+    .stagger.visible > *:nth-child(3) { opacity:1; transform:none; transition-delay: 0.24s; }
+    .stagger.visible > *:nth-child(4) { opacity:1; transform:none; transition-delay: 0.36s; }
+
+    /* ============================================================
+       MOBILE RESPONSIVE
+    ============================================================ */
+    @media (max-width: 900px) {
+      .agitation-inner {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+      .mission-inner {
+        grid-template-columns: 1fr;
+        gap: 56px;
+      }
+      .mission-photo-wrap { order: -1; }
+      .mission-photo { aspect-ratio: 16/9; }
+
+      /* Roadmap → vertical timeline */
+      .roadmap {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
+      .roadmap-connector {
+        width: 1px;
+        height: 40px;
+        margin: 0 auto;
+        background: var(--silver);
+        display: block;
+      }
+      .roadmap-step { padding: 20px 0; }
+
+      /* Value grid → single column */
+      .value-grid {
+        grid-template-columns: 1fr;
+      }
+
+      /* Hero glass panel */
+      .hero-glass {
+        padding: 40px 28px 48px;
+        border-radius: 16px;
+        margin: 0 8px;
+      }
+
+      /* CTA card */
+      .cta-card {
+        padding: 48px 28px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      :root { --pad-y: 60px; }
+      body { font-size: 16px; }
+
+      /* Show sticky mobile CTA */
+      #sticky-cta { display: block; }
+
+      /* Give page bottom room for sticky bar */
+      #footer { padding-bottom: 90px; }
+
+      .btn-gold {
+        width: 100%;
+        min-height: 52px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════════
+       SECTION 0: URGENCY BANNER
+  ═══════════════════════════════════════════════════ -->
+  <div id="banner" role="banner" aria-label="Enrollment notice">
+    <div class="pulse" aria-hidden="true"></div>
+    <p class="banner-text">⚡ Strictly Limited Seats Available &nbsp;—&nbsp; Enrollment closes once capacity is reached</p>
+    <button class="dismiss" onclick="document.getElementById('banner').style.display='none';" aria-label="Dismiss banner">✕</button>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+       SECTION 1: HERO
+  ═══════════════════════════════════════════════════ -->
+  <section id="hero" aria-label="Hero">
+
+    <nav id="hero-nav" aria-label="Site header">
+      <img src="mdt-logo.png" alt="Millionaire Day Traders" class="nav-logo" />
+    </nav>
+
+    <div class="hero-body">
+      <div class="hero-glass" role="main">
+
+        <div class="hero-eyebrow reveal">Strictly Limited Seats Available</div>
+
+        <h1 class="reveal reveal-d1">
+          Stop Trading Alone.<br />
+          Start Winning with<br />
+          <span class="kinetic-text">the Room.</span>
+        </h1>
+
+        <p class="hero-sub reveal reveal-d2">
+          Join 500+ traders using a proven, institutional-grade protocol to
+          <strong style="color:var(--text);">master the markets</strong> and build a lasting legacy.
+          No hype. No guesswork. Just the Standard.
+        </p>
+
+        <div class="hero-cta reveal reveal-d3">
+          <a
+            id="hero-cta-btn"
+            href="https://www.skool.com/mdt-elite"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-gold"
+          >
+            Claim My Seat in the Command Center ✦
+          </a>
+          <p class="hero-nudge">No commitment · Cancel anytime · Instant access</p>
+        </div>
+
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       SECTION 2: AGITATION
+  ═══════════════════════════════════════════════════ -->
+  <section id="agitation" aria-label="The problem">
+    <div class="agitation-inner">
+
+      <!-- LEFT: dark visual -->
+      <div class="agitation-visual reveal">
+        <svg class="chart-svg" viewBox="0 0 400 300" preserveAspectRatio="none" aria-hidden="true">
+          <!-- Grid lines -->
+          <line x1="0" y1="60"  x2="400" y2="60"  stroke="rgba(160,160,160,0.08)" stroke-width="1"/>
+          <line x1="0" y1="120" x2="400" y2="120" stroke="rgba(160,160,160,0.08)" stroke-width="1"/>
+          <line x1="0" y1="180" x2="400" y2="180" stroke="rgba(160,160,160,0.08)" stroke-width="1"/>
+          <line x1="0" y1="240" x2="400" y2="240" stroke="rgba(160,160,160,0.08)" stroke-width="1"/>
+          <!-- Red "retail" loss line -->
+          <polyline
+            points="0,80 60,110 100,95 140,160 180,200 230,240 280,220 340,260 400,280"
+            fill="none" stroke="#ff4d4d" stroke-width="2" stroke-dasharray="6,3" opacity="0.6"
+          />
+          <!-- Gold "MDT" gain line -->
+          <polyline
+            points="0,220 60,190 100,170 140,130 180,100 230,80 280,55 340,35 400,20"
+            fill="none" stroke="#D4AF37" stroke-width="2.5" opacity="0.9"
+          />
+          <!-- Gold area fill -->
+          <linearGradient id="goldFill" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#D4AF37" stop-opacity="0.15"/>
+            <stop offset="100%" stop-color="#D4AF37" stop-opacity="0"/>
+          </linearGradient>
+          <polygon
+            points="0,220 60,190 100,170 140,130 180,100 230,80 280,55 340,35 400,20 400,300 0,300"
+            fill="url(#goldFill)"
+          />
+        </svg>
+        <div class="chart-overlay">
+          <div class="chart-label">MDT Members — 30-Day Return</div>
+          <div class="chart-value">+34.2%<span>↑</span></div>
+        </div>
+      </div>
+
+      <!-- RIGHT: copy -->
+      <div class="agitation-copy reveal reveal-d1">
+        <span class="agitation-label">The Problem</span>
+        <h2>The Market is Designed to Take Your Capital.<br /><span class="gold">We're Here to Help You Keep It.</span></h2>
+        <p>
+          Most retail traders fail because they're fighting the algorithms alone. We provide the institutional edge, the daily live floor, and the community discipline you need to move from &ldquo;breakeven&rdquo; to &ldquo;breakout.&rdquo;
+        </p>
+        <div class="agitation-stats stagger">
+          <div class="ag-stat">
+            <div class="ag-stat-num">80%</div>
+            <div class="ag-stat-label">Retail traders lose capital</div>
+          </div>
+          <div class="ag-stat">
+            <div class="ag-stat-num">500+</div>
+            <div class="ag-stat-label">Active MDT members</div>
+          </div>
+          <div class="ag-stat">
+            <div class="ag-stat-num">Daily</div>
+            <div class="ag-stat-label">Live trading floor</div>
+          </div>
+          <div class="ag-stat">
+            <div class="ag-stat-num">1%</div>
+            <div class="ag-stat-label">Institutional protocols used</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       SECTION 3: THE PROTOCOL — 3-STEP ROADMAP
+  ═══════════════════════════════════════════════════ -->
+  <section id="protocol" aria-label="The Protocol">
+    <div class="protocol-header reveal">
+      <span class="ui-label">The Protocol</span>
+      <h2>A 3-Phase System Built for <span class="gold">Legacy Traders</span></h2>
+    </div>
+
+    <div class="roadmap stagger" role="list">
+
+      <!-- Step 01 -->
+      <div class="roadmap-step" role="listitem">
+        <div class="step-badge">Step 01</div>
+        <div class="step-circle" aria-hidden="true">🛡️</div>
+        <div class="step-phase">Phase 1 — The Shield</div>
+        <p>Master the risk management protocols that the 1% use to protect their downside before a single trade is placed.</p>
+      </div>
+
+      <div class="roadmap-connector" aria-hidden="true"></div>
+
+      <!-- Step 02 -->
+      <div class="roadmap-step" role="listitem">
+        <div class="step-badge">Step 02</div>
+        <div class="step-circle" aria-hidden="true">⚡</div>
+        <div class="step-phase">Phase 2 — The Edge</div>
+        <p>Deploy a repeatable, high-probability strategy designed for clarity in every market cycle.</p>
+      </div>
+
+      <div class="roadmap-connector" aria-hidden="true"></div>
+
+      <!-- Step 03 -->
+      <div class="roadmap-step" role="listitem">
+        <div class="step-badge">Step 03</div>
+        <div class="step-circle" aria-hidden="true">📈</div>
+        <div class="step-phase">Phase 3 — The Scale</div>
+        <p>Join the Live Floor daily to execute with the community and refine your psychology in real-time.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       SECTION 4: TESTIMONIAL
+  ═══════════════════════════════════════════════════ -->
+  <section id="testimonial" aria-label="Member testimonial">
+    <div class="testimonial-wrap">
+      <span class="ui-label">Social Proof</span>
+      <div class="testimonial-card reveal">
+        <h2>From &ldquo;Guessing&rdquo; to <span class="gold">Professional Consistency.</span></h2>
+        <blockquote>
+          I finally found a consistent edge. The community support is the real game-changer. I stopped chasing hype and started following the protocol. My approach to the market is completely different now — cleaner, calmer, and consistently profitable.
+        </blockquote>
+        <cite>— <span>Verified MDT Member</span></cite>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       SECTION 5: MISSION / FOUNDERS
+  ═══════════════════════════════════════════════════ -->
+  <section id="mission" aria-label="Our Mission">
+    <div class="mission-inner">
+
+      <!-- LEFT: Photo -->
+      <div class="mission-photo-wrap reveal">
+        <div class="mission-photo">
+          <div class="mission-photo-placeholder">
+            <span class="ph-icon">👤</span>
+            <span class="ph-label">Founder Photo</span>
+          </div>
+        </div>
+        <div class="mission-photo-tag">Founders &amp; <strong>Lead Traders</strong></div>
+      </div>
+
+      <!-- RIGHT: Copy -->
+      <div class="mission-copy reveal reveal-d1">
+        <span class="ui-label">Our Mission</span>
+        <h2>Built by Traders.<br /><span class="gold">For the Culture.</span></h2>
+        <div class="mission-divider"></div>
+        <p>
+          We created Millionaire Day Traders to be the room we never had. This isn't just about P&amp;L — it's about ownership, excellence, and creating a financial foundation that lasts for generations.
+        </p>
+        <p>
+          Every protocol, every live session, every alert inside MDT was built by traders who've lived the retail struggle and found the institutional path forward. Now, we pass the Standard to you.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       SECTION 6: VALUE STACK
+  ═══════════════════════════════════════════════════ -->
+  <section id="value" aria-label="What you get">
+    <div class="value-header reveal">
+      <span class="ui-label">Inside the Command Center</span>
+      <h2>Everything You Need to <span class="gold">Trade with Precision</span></h2>
+      <p class="sub-headline" style="margin-top:14px;">Four premium components. One unified system.</p>
+    </div>
+
+    <div class="value-grid stagger" role="list">
+
+      <div class="value-card" role="listitem">
+        <div class="value-icon" aria-hidden="true">🎓</div>
+        <span class="value-card-label">40+ Hours of Curriculum</span>
+        <h3>The Masterclass</h3>
+        <p>Comprehensive video modules covering every dimension of institutional trading — from market structure to execution psychology. Learn at your pace, apply immediately.</p>
+      </div>
+
+      <div class="value-card" role="listitem">
+        <div class="value-icon" aria-hidden="true">🏛️</div>
+        <span class="value-card-label">Live Daily Sessions</span>
+        <h3>The Live Floor</h3>
+        <p>Morning market prep and live execution calls, every trading day. Trade alongside the team in real-time, ask questions, and build the discipline that separates professionals from amateurs.</p>
+      </div>
+
+      <div class="value-card" role="listitem">
+        <div class="value-icon" aria-hidden="true">📡</div>
+        <span class="value-card-label">Real-Time Intelligence</span>
+        <h3>The Alpha Feed</h3>
+        <p>Exclusive proprietary indicators, curated watchlists, and real-time alerts — the exact tools our lead traders use to identify high-probability setups before the crowd.</p>
+      </div>
+
+      <div class="value-card" role="listitem">
+        <div class="value-icon" aria-hidden="true">🔑</div>
+        <span class="value-card-label">High-Level Community</span>
+        <h3>The Inner Circle</h3>
+        <p>Private access to our elite Skool community. Connect with serious traders, share ideas, hold each other accountable, and surround yourself with the standard of excellence.</p>
+      </div>
+
+    </div>
+
+    <!-- MacBook product showcase -->
+    <div class="mockup-showcase reveal">
+      <div class="mockup-badge">The MDT Command Center — Live View</div>
+      <div class="mockup-frame">
+        <img src="macbook-mockup.png" alt="MDT Elite command center dashboard on a MacBook" loading="lazy" />
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       SECTION 7: FINAL CTA
+  ═══════════════════════════════════════════════════ -->
+  <section id="final-cta" aria-label="Call to action">
+    <div class="cta-card reveal">
+      <span class="ui-label">Join the Movement</span>
+      <h2>Ready to <span class="gold">Elevate?</span></h2>
+      <p class="sub-headline">
+        Enrollment closes once our current seats are filled to ensure every member receives the full support and attention they deserve.
+      </p>
+      <a
+        id="final-cta-btn"
+        href="https://www.skool.com/mdt-elite"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="btn-gold"
+      >
+        Get Instant Access on Skool ✦
+      </a>
+      <p class="cta-warning">
+        <strong>Warning:</strong> Enrollment closes once seats are filled to ensure support quality.
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════════════ -->
+  <footer id="footer" aria-label="Site footer">
+    <div class="footer-inner">
+      <img src="mdt-logo.png" alt="Millionaire Day Traders" class="footer-logo" />
+      <p class="footer-legal">
+        &copy; 2026 Millionaire Day Traders. All rights reserved.
+        Results shown are not typical. Trading involves substantial risk of loss and is not suitable for all investors.
+        Past performance is not indicative of future results.
+        The information provided is for educational purposes only and does not constitute financial advice.
+        <a href="https://www.skool.com/mdt-elite" target="_blank" rel="noopener">Skool Community</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════════════════════════════
+       STICKY MOBILE CTA
+  ═══════════════════════════════════════════════════ -->
+  <div id="sticky-cta" aria-label="Get access" role="complementary">
+    <a
+      id="sticky-cta-btn"
+      href="https://www.skool.com/mdt-elite"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="btn-gold"
+    >
+      Claim My Seat — Get Access ✦
+    </a>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+       JAVASCRIPT
+  ═══════════════════════════════════════════════════ -->
+  <script>
+    'use strict';
+
+    /* ── Scroll Reveal ─────────────────────────────── */
+    const revealEls  = document.querySelectorAll('.reveal');
+    const staggerEls = document.querySelectorAll('.stagger');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    revealEls.forEach(el  => observer.observe(el));
+    staggerEls.forEach(el => observer.observe(el));
+
+    /* ── Sticky Mobile CTA ─────────────────────────── */
+    const stickyCta = document.getElementById('sticky-cta');
+    const heroEl    = document.getElementById('hero');
+
+    if (stickyCta && heroEl) {
+      const stickyObs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          // Show sticky CTA when hero is out of viewport
+          stickyCta.style.transform = entry.isIntersecting
+            ? 'translateY(110%)'
+            : 'translateY(0)';
+        });
+      }, { threshold: 0.05 });
+
+      stickyObs.observe(heroEl);
+
+      // Initial hidden state (slide in from bottom)
+      stickyCta.style.transition = 'transform 0.4s cubic-bezier(0.25,0.8,0.25,1)';
+      stickyCta.style.transform  = 'translateY(110%)';
+    }
+
+    /* ── Count-Up Numbers ──────────────────────────── */
+    function countUp(el, target, suffix) {
+      const duration = 1800;
+      const start = performance.now();
+      const update = (now) => {
+        const elapsed = Math.min((now - start) / duration, 1);
+        const val = Math.floor(easeOut(elapsed) * target);
+        el.textContent = val + (suffix || '');
+        if (elapsed < 1) requestAnimationFrame(update);
+        else el.textContent = target + (suffix || '');
+      };
+      requestAnimationFrame(update);
+    }
+
+    function easeOut(t) { return 1 - Math.pow(1 - t, 3); }
+
+    const countEls = document.querySelectorAll('[data-count]');
+    const countObs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          countUp(el, parseInt(el.dataset.count, 10), el.dataset.suffix || '');
+          countObs.unobserve(el);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    countEls.forEach(el => countObs.observe(el));
+  </script>
+
+</body>
+</html>
